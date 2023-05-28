@@ -21,10 +21,12 @@ public class SanPhamController {
 
     @GetMapping
     public String view(Model model
-        , @RequestParam(name = "tenSanPham") String keyword) {
+            , @RequestParam(defaultValue = "1") int page
+            , @RequestParam(name = "tenSanPham", required = false) String keyword) {
         Page<SanPham> pageSanPham;
 
-        Pageable pageable = PageRequest.of(1, 10);
+        if (page < 1) page = 1;
+        Pageable pageable = PageRequest.of(page - 1, 10);
         if (keyword == null || keyword.isBlank()) {
             pageSanPham = repository.findAll(pageable);
         } else {

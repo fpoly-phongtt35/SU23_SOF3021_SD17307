@@ -23,8 +23,16 @@
         </c:forEach>
     </table>
     <div>
-        <a href=""> Previous </a>
+        <c:if test="${pageSanPham.getNumber() + 1 > 1}">
+            <a href="?page=${pageSanPham.getNumber() + 1 - 1}&tenSanPham=${param.tenSanPham}">
+                Previous
+            </a>
+        </c:if>
         <span> ${pageSanPham.getNumber() + 1} / ${pageSanPham.getTotalPages()} </span>
-        <a href=""> Next </a>
+        <c:if test="${pageSanPham.getNumber() + 1 < pageSanPham.getTotalPages()}">
+            <a href="?page=${pageSanPham.getNumber() + 1 + 1}&tenSanPham=${param.tenSanPham}">
+                Next
+            </a>
+        </c:if>
     </div>
 </c:if>
